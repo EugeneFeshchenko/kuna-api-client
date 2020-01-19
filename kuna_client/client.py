@@ -8,13 +8,13 @@ from urllib.parse import urlencode
 import requests
 
 
-class KunaApiClient(object):
+class KunaApiClient:
     API_DOMAIN = 'https://kuna.io/api/v2'
-    TICKERS_URL = '{}/tickers/ethuah'.format(API_DOMAIN)
-    ORDERS_URL = '{}/orders'.format(API_DOMAIN)
-    ORDER_DELETE_URL = '{}/order/delete'.format(API_DOMAIN)
-    TRADES_URL = '{}/trades/my'.format(API_DOMAIN)
-    ME_URL = '{}/members/me'.format(API_DOMAIN)
+    TICKERS_URL = f'{API_DOMAIN}/tickers/ethuah'
+    ORDERS_URL = f'{API_DOMAIN}/orders'
+    ORDER_DELETE_URL = f'{API_DOMAIN}/order/delete'
+    TRADES_URL = f'{API_DOMAIN}/trades/my'
+    ME_URL = f'{API_DOMAIN}/members/me'
 
     def __init__(self, api_key, api_secret):
         self.api_key = api_key
@@ -28,7 +28,7 @@ class KunaApiClient(object):
         msg = '{0}|{1}|{2}'.format(method.upper(), url.replace('https://kuna.io', ''), urlencode(params))
         signature = hmac.new(self.api_secret.encode('utf-8'), msg=msg.encode('utf-8'), digestmod=hashlib.sha256)
         signature = signature.hexdigest()
-        return '{0}?access_key={1}&tonce={2}&signature={3}'.format(url, self.api_key, tonce, signature)
+        return f'{url}?access_key={self.api_key}&tonce={tonce}&signature={signature}'
 
     def sell_eth(self, volume, price):
         params = {'side': 'sell',
