@@ -4,6 +4,7 @@ import json
 import time
 from collections import OrderedDict
 from urllib.parse import urlencode
+import os
 
 import requests
 
@@ -17,8 +18,8 @@ class KunaApiClient:
     ME_URL = f'{API_DOMAIN}/members/me'
 
     def __init__(self, api_key, api_secret):
-        self.api_key = api_key
-        self.api_secret = api_secret
+        self.api_key = os.getenv('KUNA_API_KEY')
+        self.api_secret = os.getenv('KUNA_API_SECRET')
 
     def __build_personal_url(self, url, method, params):
         tonce = int(round(time.time() * 1000))
