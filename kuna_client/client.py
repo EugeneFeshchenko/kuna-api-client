@@ -17,7 +17,7 @@ class KunaApiClient:
     TRADES_URL = f'{API_DOMAIN}/trades/my'
     ME_URL = f'{API_DOMAIN}/members/me'
 
-    def __init__(self, api_key, api_secret):
+    def __init__(self):
         self.api_key = os.getenv('KUNA_API_KEY')
         self.api_secret = os.getenv('KUNA_API_SECRET')
 
